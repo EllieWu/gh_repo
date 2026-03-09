@@ -19,8 +19,29 @@ export default defineConfigWithVueTs(
 
   globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
 
-  ...pluginVue.configs['flat/essential'],
+  ...pluginVue.configs['flat/strongly-recommended'],
   vueTsConfigs.recommended,
+
+  // 自訂 Vue 規則
+  {
+    files: ['**/*.vue'],
+    rules: {
+      // 允許單字元件名
+      'vue/multi-word-component-names': 'off',
+      // props 必須定義型別
+      'vue/require-prop-types': 'error',
+      // emit 必須定義
+      'vue/require-explicit-emits': 'error',
+      // template 中不可使用 v-html（XSS 風險）
+      'vue/no-v-html': 'warn',
+      // 屬性順序：先 v-if/v-for，再 :prop，再 @event
+      'vue/attributes-order': 'warn',
+      // script setup 中的 defineProps/defineEmits 不需要 import
+      'vue/no-undef-components': 'error',
+      // 忽略 _ 開頭的變數
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    },
+  },
 
   {
     ...pluginPlaywright.configs['flat/recommended'],
