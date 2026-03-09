@@ -28,6 +28,11 @@ coverage
 
 .eslintcache
 
+# Environment variables (contains secrets)
+.env
+.env.*
+!.env.example
+
 # Cypress
 /cypress/videos/
 /cypress/screenshots/
